@@ -2,6 +2,7 @@
   <div class="pa-6">
     <v-container class="white rounded-xl pa-10 pt-2">
     <!-- Input form -->
+    <v-row>
       <v-text-field
         type="number"
         v-model="newstepnum"
@@ -15,6 +16,15 @@
         :rules="inputrules"
       >
       </v-text-field>
+        <v-btn
+        @click="addstep"
+        @keyup.enter="addstep"
+        dark
+        class="primary mx-3 mt-7"
+        >
+          Add counter
+        </v-btn>
+      </v-row>
       <v-row no-gutters>
         <!-- Creating cards based on grid system -->
         <v-col
@@ -42,7 +52,7 @@
                 color="grey lighten-4"
                 class="rounded-l-xl"
               >
-                {{ step.sumnum }}
+                {{ fixfloat(step.sumnum) }}
               </v-list-item-avatar>
             </v-list-item>
 
@@ -108,8 +118,17 @@ export default {
         if (this.steps[i].id == id) {
           this.steps[i].newvalue = this.steps[i].newvalue + 1;
           this.steps[i].sumnum = this.steps[i].number * this.steps[i].newvalue;
+
         }
       }
+    },
+
+      //Fixing folat numbers display
+    fixfloat(num){
+       if (Number(num) === num && num % 1 !== 0){
+         num = num.toFixed(2);
+       }
+       return num
     },
       // Delete the selected card
     deletestep(id) {
