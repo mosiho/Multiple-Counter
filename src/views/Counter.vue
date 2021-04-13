@@ -103,7 +103,8 @@ export default {
     },
       // Add numbers for each step
     editstep(id) {
-      for (var i in this.steps) {
+
+      for  (let i in this.steps) {
         if (this.steps[i].id == id) {
           this.steps[i].newvalue = this.steps[i].newvalue + 1;
           this.steps[i].sumnum = this.steps[i].number * this.steps[i].newvalue;
